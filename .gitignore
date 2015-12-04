@@ -6,7 +6,6 @@ node_modules/
 public/
 config/
 server/test/coverage/
-modules/
 coverage/
 access.log
 

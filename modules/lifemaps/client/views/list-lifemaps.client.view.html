@@ -1,0 +1,18 @@
+<section ng-controller="LifemapsController" ng-init="find()">
+  <div class="page-header">
+    <h1>LifeMaps</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="lifemap in lifemaps" ui-sref="lifemaps.view({lifemapId: lifemap._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Created on
+        <span ng-bind="lifemap.created | date:'mediumDate'"></span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="lifemap.information.summary"></h4>
+      <p class="list-group-item-text" ng-bind="lifemap.information.data"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="lifemaps.$resolved && !lifemaps.length">
+    No LifeMaps created - <a ui-sref="lifemaps.create">Create a LifeMap</a>?
+  </div>
+</section>
