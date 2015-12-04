@@ -212,7 +212,7 @@ gulp.task('karma', function (done) {
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done).start();
-  
+
   return gulp.src([])
     .pipe(plugins.karma({
       configFile: 'karma.conf.js',
