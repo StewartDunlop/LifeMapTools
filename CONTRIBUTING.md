@@ -16,13 +16,13 @@ Before you create a new Issue:
 
 * Create a topic branch from the master branch.
 * Check for unnecessary whitespace / changes with `git diff --check` before committing.
-	* Also check that your code is formatted properly with spaces (hint: Use [.editorconfig](http://editorconfig.org/))
+  * Also check that your code is formatted properly with spaces (hint: Use [.editorconfig](http://editorconfig.org/))
 * Keep git commit messages clear and appropriate
-	* If possible, please "squash" your commits to as few commits as possible/reasonable such as one commit for implementation, one for tests, and one for documentation before finally squashing to one commit when getting the LGTM from a collaborator.
+  * If possible, please "squash" your commits to as few commits as possible/reasonable such as one commit for implementation, one for tests, and one for documentation before finally squashing to one commit when getting the LGTM from a collaborator.
   * Follow the commit message guidelines below.
 * Make Sure you have added any tests necessary to test your code.
-	* Run __all__ the tests to ensure nothing else was accidently broken.
-	* Don't rely on the existing tests to see if you've broken code elsewhere; test the changes you made in a browser too!
+  * Run __all__ the tests to ensure nothing else was accidently broken.
+  * Don't rely on the existing tests to see if you've broken code elsewhere; test the changes you made in a browser too!
 * Update the Documentation to go along with any changes in functionality / improvements in a separate pull request against the gh-pages branch.
 
 ## Commit Message Guidelines
@@ -70,7 +70,7 @@ Fixes #82
 * Push your changes to your topic branch on your fork of the repo.
 * Submit a pull request from your topic branch to the master branch on the MEAN.JS repository.
 * Be sure to tag any issues your pull request is taking care of / contributing to.
-	* By adding "Closes #xyz" to a commit message will auto close the issue once the pull request is merged in.
+  * By adding "Closes #xyz" to a commit message will auto close the issue once the pull request is merged in.
 * Small changes are usually accepted and merged in within a week (provided that 2 collaborators give the okay)
 * Larger changes usually spark further discussion and possible changes prior to being merged in.
 
