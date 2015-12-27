@@ -8,6 +8,7 @@ var path = require('path'),
     Lifemap = mongoose.model('Lifemap'),
     errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+var ObjectId = mongoose.Types.ObjectId;
 /**
  * Create a lifemap
  */
@@ -105,5 +106,19 @@ exports.lifemapByID = function (req, res, next, id) {
         }
         req.lifemap = lifemap;
         next();
+    });
+};
+
+exports.listForUser = function(req, res) {
+    console.log('Calling list for user');
+    Lifemap.find({'user' : new ObjectId(req.query.userId)},{})
+        .sort('-created').populate('user', 'displayName').exec(function(err, lifemaps) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(lifemaps);
+        }
     });
 };

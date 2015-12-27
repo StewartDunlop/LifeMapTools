@@ -1,28 +1,28 @@
 'use strict';
 
 // Articles controller
-angular.module('articles').controller('LifemapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-  function ($scope, $stateParams, $location, Authentication, Lifemaps) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
+  function ($scope, $stateParams, $location, Authentication, Articles) {
     $scope.authentication = Authentication;
 
-    // Create new Lifemap
+    // Create new Article
     $scope.create = function (isValid) {
       $scope.error = null;
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'lifemapForm');
+        $scope.$broadcast('show-errors-check-validity', 'articleForm');
 
         return false;
       }
 
       // Create new Article object
-      var lifemap = new Lifemaps({
+      var article = new Articles({
 
       });
 
       // Redirect after save
-      lifemap.$save(function (response) {
-        $location.path('lifemaps/' + response._id);
+      article.$save(function (response) {
+        $location.path('articles/' + response._id);
 
         // Clear form fields
 
@@ -31,37 +31,37 @@ angular.module('articles').controller('LifemapsController', ['$scope', '$statePa
       });
     };
 
-    // Remove existing Lifemap
-    $scope.remove = function (lifemap) {
-      if (lifemap) {
-        lifemap.$remove();
+    // Remove existing Articl
+    $scope.remove = function (article) {
+      if (article) {
+        article.$remove();
 
-        for (var i in $scope.lifemaps) {
-          if ($scope.lifemaps[i] === lifemap) {
-            $scope.lifemaps.splice(i, 1);
+        for (var i in $scope.articles) {
+          if ($scope.articles[i] === article) {
+            $scope.articles.splice(i, 1);
           }
         }
       } else {
-        $scope.lifemap.$remove(function () {
-          $location.path('lifemaps');
+        $scope.article.$remove(function () {
+          $location.path('articles');
         });
       }
     };
 
-    // Update existing Lifemap
+    // Update existing article
     $scope.update = function (isValid) {
       $scope.error = null;
 
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'lifemapForm');
+        $scope.$broadcast('show-errors-check-validity', 'articleForm');
 
         return false;
       }
 
-      var lifemap = $scope.lifemap;
+      var article = $scope.article;
 
-      lifemap.$update(function () {
-        $location.path('lifemap/' + article._id);
+      article.$update(function () {
+        $location.path('article/' + article._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -69,13 +69,13 @@ angular.module('articles').controller('LifemapsController', ['$scope', '$statePa
 
     // Find a list of Articles
     $scope.find = function () {
-      $scope.lifemaps = Lifemaps.query();
+      $scope.articles = Articles.query();
     };
 
-    // Find existing Lifemap
+    // Find existing Article
     $scope.findOne = function () {
-      $scope.lifemap = Lifemaps.get({
-        lifemapId: $stateParams.lifemapId
+      $scope.article = Articles.get({
+        articleId: $stateParams.articleId
       });
     };
   }

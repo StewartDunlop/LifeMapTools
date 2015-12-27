@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LifeMap</title>
+</head>
+<body>
+  <h4>LifeMaps</h4>
+  <section data-ng-controller="LifemapsController" ng-init="findAll()">
+    <div class="toolbar">
+      <label class="btn btn-default" ng-click="addMap()">Add</label>
+    </div>
+
+    <div id="lifemapsPage">
+      <div ng-repeat="lifemap in lifemaps track by $index">
+        <div jks-panel paneldata="lifemap"></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

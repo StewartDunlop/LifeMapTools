@@ -1,0 +1,47 @@
+.toolbar {
+    background-color: white;
+    border:1px solid black;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    margin:1px;
+    padding: 5px;
+    display: inline-block;
+    float: left;
+}
+
+
+.panel {
+    position: absolute;
+    background-color: lightgrey;
+}
+
+.panelaccordionheading {
+    width : 100%;
+}
+
+.headingbackground {
+    display: table;
+    width : 100%;
+    margin-bottom: 2px;
+    cursor : pointer;
+}
+
+.panelheading {
+    width: auto;
+    display: table-cell;
+    cursor: move;
+}
+
+.accordionctrl {
+    display: table-cell;
+}
+
+.additem {
+    cursor : pointer;
+}
+
+.panelBody {
+    margin: 5px;
+    background-color: white;
+}

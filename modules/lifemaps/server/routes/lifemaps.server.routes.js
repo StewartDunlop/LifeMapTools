@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var lifemapsPolicy = require('../policies/lifemaps.server.policy'),
-  articles = require('../controllers/lifemaps.server.controller');
+  lifemaps = require('../controllers/lifemaps.server.controller');
 
 module.exports = function (app) {
   // Lifemaps collection routes
@@ -17,6 +17,9 @@ module.exports = function (app) {
     .get(lifemaps.read)
     .put(lifemaps.update)
     .delete(lifemaps.delete);
+
+  app.route('/lifemapsForUser')
+      .get(lifemaps.listForUser);
 
   // Finish by binding the article middleware
   app.param('lifemapId', lifemaps.lifemapByID);

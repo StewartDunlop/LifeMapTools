@@ -1,33 +1,42 @@
 'use strict';
 
 // Lifemaps controller
-angular.module('lifemaps').controller('LifemapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Lifemaps',
-    function ($scope, $stateParams, $location, Authentication, Lifemaps) {
+angular.module('lifemaps').controller('LifemapsController', ['$scope', '$stateParams', '$location',
+    'Authentication', 'Lifemaps', 'Restservice',
+    function ($scope, $stateParams, $location, Authentication, Lifemaps, Restservice) {
         $scope.authentication = Authentication;
 
+        var defYPos = 200;
+        var defXPos = 200;
+        var defWidth = 200;
+        var defHeight = 200;
+
         // Create new Lifemap
-        $scope.create = function (isValid) {
+        $scope.addMap = function () {
             $scope.error = null;
-
-            if (!isValid) {
-                $scope.$broadcast('show-errors-check-validity', 'lifemapForm');
-
-                return false;
-            }
-
+            console.log('Add a map');
             // Create new Lifemap object
+            var information = {
+                title : 'New Title'
+            };
             var lifemap = new Lifemaps({
-                title: this.title,
-                content: this.content
+                information : information,
+                xpos : defYPos,
+                ypos : defXPos,
+                width : defWidth,
+                height : defHeight,
+                expanded_height : defHeight,
+                showbody : true,
+                accordion : true,
+                draggable : true,
+                resizable : true
             });
 
-            // Redirect after save
-            lifemap.$save(function (response) {
-                $location.path('lifemaps/' + response._id);
-
-                // Clear form fields
-                $scope.title = '';
-                $scope.content = '';
+            // Get Restangularised lifemap back
+            lifemap.$save(function (lifemap) {
+                Restservice.one('lifemaps', lifemap._id).get().then(function(lm) {
+                    $scope.lifemaps.push(lm);
+                });
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
@@ -70,8 +79,12 @@ angular.module('lifemaps').controller('LifemapsController', ['$scope', '$statePa
         };
 
         // Find a list of Lifemaps
-        $scope.find = function () {
-            $scope.lifemaps = Lifemaps.query();
+        $scope.findAll = function () {
+            Restservice.all('lifemapsForUser').getList({userId: $scope.authentication.user._id}).then(
+                function(lifemapsForUser) {
+                    $scope.lifemaps = lifemapsForUser;
+                }
+            );
         };
 
         // Find existing Lifemap
@@ -80,5 +93,6 @@ angular.module('lifemaps').controller('LifemapsController', ['$scope', '$statePa
                 lifemapId: $stateParams.lifemapId
             });
         };
+
     }
 ]);
