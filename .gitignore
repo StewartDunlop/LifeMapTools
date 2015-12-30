@@ -3,8 +3,7 @@
 .sass-cache/
 npm-debug.log
 node_modules/
-public/
-config/
+public/lib/
 server/test/coverage/
 coverage/
 access.log

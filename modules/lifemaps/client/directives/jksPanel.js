@@ -42,12 +42,12 @@ angular.module('lifemaps')
                         $scope.paneldata.expanded_height = ui.size.height;
                     });
                 });
-                var xConst = $scope.paneldata.panelleft;
-                var yConst = $scope.paneldata.paneltop;
+                var xConst = $scope.paneldata.xpos;
+                var yConst = $scope.paneldata.ypos;
                 this.updatePanelPosn = function(xVal, yVal) {
                     $scope.paneldata.moving = 'moving';
-                    $scope.paneldata.xpos = xConst + xVal;
-                    $scope.paneldata.ypos = yConst+yVal;
+                    $scope.paneldata.xpos = Number(xConst + xVal);
+                    $scope.paneldata.ypos = Number(yConst+yVal);
                     $scope.$apply();
                 };
             }
@@ -65,7 +65,7 @@ angular.module('lifemaps')
             // Add conditional code for whether draggable is on or off
             link: function(scope, element, attr, parentCtrl) {
                 // Generate html
-                var templateString = '<div id="divheading" class="headingbackground"><span id="panelhdg" class="panelheading">'+scope.paneldata.heading+'</span>';
+                var templateString = '<div id="divheading" class="headingbackground"><span id="panelhdg" class="panelheading">'+scope.paneldata.information+'</span>';
                 if (scope.paneldata.accordion) {
                     if (scope.paneldata.showbody === true) {
                         templateString = templateString + '<span id="accordionctrl" class="accordianctrl glyphicon glyphicon-menu-down"></span>';
@@ -109,6 +109,8 @@ angular.module('lifemaps')
                     // Disconnect the handlers
                     $document.off('mousemove', mousemove);
                     $document.off('mouseup', mouseup);
+                    // Save the position
+
                 }
                 // Draggable code end
             }
@@ -125,7 +127,20 @@ angular.module('lifemaps')
             require: '^jksPanel',
             // The panel holds the positioning and size controls
             // Add conditional code for whether draggable is on or off
-            templateUrl: 'panelbody.html',
+            //templateUrl: 'panelbody.html',
+            template:'<div class="panelBody" ng-show="paneldata.showbody">\
+            <div>\
+            <span ng-click="addItem(additemdata)" class="additem glyphicon glyphicon-plus"></span>\
+            <input type="text" ng-model="additemdata">\
+            </div>\
+            <div ng-repeat="item in paneldata.data.items">\
+            <span ng-click="focusOnItem(item)" ng-show="itemInFocusId !== item.id" >{{item.itemdata}}</span>\
+            <span ng-show="itemInFocusId === item.id" ><input type="text" ng-model="item.itemdata">\
+            <span ng-click="done()" class="additem glyphicon glyphicon-ok"></span>\
+            <span ng-click="removeItem(item)" class="additem glyphicon glyphicon-remove"></span>\
+            </span>\
+            </div>\
+            </div>',
             link: function(scope, element, attr, parentCtrl) {
                 var templateString = '<div ng-show="paneldata.showbody">';
                 templateString += '<div><span ng-click="addItem(additemdata)" class="additem glyphicon glyphicon-plus"></span><input type="text" ng-model="additemdata"></div>';
