@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 // Configure the 'chat' module routes
@@ -13,3 +14,4 @@ angular.module('chat').config(['$stateProvider',
       });
   }
 ]);
+*/

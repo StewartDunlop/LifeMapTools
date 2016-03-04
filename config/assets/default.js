@@ -6,7 +6,8 @@ module.exports = {
       css: [
         'public/lib/jquery-ui/themes/base/jquery-ui.css',
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css'
+        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/jks-panel/css/jks-panel.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.js',
@@ -21,7 +22,8 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/lodash/lodash.js',
         'public/lib/restangular/dist/restangular.min.js',
-        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
+        'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/jks-panel/dist/jks-panel.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
